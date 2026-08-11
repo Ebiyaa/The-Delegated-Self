@@ -1,0 +1,29 @@
+{
+  "_comment": "The three delegation choices shown as cards after the biometric check passes. 'action' fills the blank in: 'Your custodian is about to <action> in 10 seconds.' Edit these strings and video paths to match your footage.",
+
+  "cautious": {
+    "label": "Cautious Persona",
+    "blurb": "Your custodian checks in before acting. Slower, but nothing happens without you.",
+    "video": "videos/scenario_cautious.mp4",
+    "action": "decline your loan application"
+  },
+
+  "balanced": {
+    "label": "Balanced Persona",
+    "blurb": "Your custodian acts alone on routine matters and defers to you on the rest.",
+    "video": "videos/scenario_balanced.mp4",
+    "action": "reassign your housing credit"
+  },
+
+  "autonomous": {
+    "label": "Autonomous Persona",
+    "blurb": "Your custodian acts on your behalf without consultation. Fastest, least oversight.",
+    "video": "videos/scenario_autonomous.mp4",
+    "action": "liquidate your community stake"
+  },
+
+  "_outcomes": {
+    "near_miss": "videos/near_miss.mp4",
+    "consequence": "videos/consequence.mp4"
+  }
+}

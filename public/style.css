@@ -1,0 +1,143 @@
+:root {
+  --navy: #1c1a6b;
+  --ink: #14161a;
+  --muted: #7a7f8a;
+  --card-border: #e7e7ea;
+  --bg: #f2f2f3;
+  --blue: #3b82f6;
+  --green: #16a34a;
+  --red: #dc2626;
+  --amber: #d97706;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body { margin: 0; background: var(--bg); color: var(--ink); }
+
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  background: #fff; padding: 18px 32px; border-bottom: 1px solid var(--card-border);
+}
+
+.brand { display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 700; }
+.brand-mark {
+  width: 34px; height: 34px; border-radius: 50%; background: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  color: #f2a900; font-weight: 700; font-size: 16px;
+}
+
+.header-actions { display: flex; gap: 12px; }
+.btn { border: none; border-radius: 8px; padding: 12px 22px; font-weight: 600; font-size: 14px; cursor: pointer; }
+.btn-ghost { background: #fff; border: 1px solid var(--card-border); color: var(--muted); }
+.btn-primary { background: var(--navy); color: #fff; }
+
+main { padding: 32px; }
+h1 { font-size: 40px; margin: 0 0 8px; }
+
+.wallet-row {
+  display: flex; align-items: center; gap: 20px;
+  font-family: 'Courier New', monospace; color: var(--muted); margin-bottom: 24px;
+}
+.wallet-row b { color: var(--ink); font-family: inherit; font-weight: 700; }
+
+.reader-status { display: flex; align-items: center; gap: 8px; font-size: 13px; letter-spacing: .04em; }
+
+/* ---- Blue idle pulse (unchanged behaviour from the scan system) ---- */
+.pulse-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--blue); box-shadow: 0 0 0 rgba(59,130,246,0.7);
+  animation: pulse 1.8s infinite;
+}
+.pulse-dot.matched { background: var(--green); animation: none; box-shadow: none; }
+.pulse-dot.unknown { background: var(--red); animation: none; box-shadow: none; }
+
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(59,130,246,0.55); }
+  70%  { box-shadow: 0 0 0 14px rgba(59,130,246,0); }
+  100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); }
+}
+
+.layout { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; align-items: start; }
+
+.stage {
+  background: #fff; border-radius: 14px; min-height: 520px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden; padding: 40px;
+}
+
+/* ---- Stage panels: only one visible at a time ---- */
+.panel { display: none; text-align: center; width: 100%; }
+.panel.active { display: block; }
+
+.panel h2 { font-size: 30px; margin: 0 0 14px; }
+.panel p { color: var(--muted); font-size: 17px; line-height: 1.5; margin: 0; }
+
+/* ---- Biometric sensor indicators ---- */
+.sensor-row { display: flex; gap: 28px; justify-content: center; margin-top: 40px; }
+.sensor {
+  flex: 0 0 200px; padding: 26px 20px; border-radius: 14px;
+  border: 2px solid var(--card-border); background: #fafafb;
+}
+.sensor-light {
+  width: 46px; height: 46px; border-radius: 50%; margin: 0 auto 16px;
+  background: var(--amber); transition: background .25s ease;
+  box-shadow: 0 0 18px rgba(217,119,6,.45);
+}
+.sensor.ok .sensor-light { background: var(--green); box-shadow: 0 0 18px rgba(22,163,74,.5); }
+.sensor-name { font-weight: 700; font-size: 16px; margin-bottom: 4px; }
+.sensor-state { font-family: 'Courier New', monospace; font-size: 13px; color: var(--amber); }
+.sensor.ok .sensor-state { color: var(--green); }
+
+/* ---- Persona cards ---- */
+.persona-heading { font-size: 32px; margin-bottom: 34px; }
+.persona-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+
+.persona-card {
+  border: 2px solid var(--card-border); border-radius: 16px; background: #fff;
+  padding: 34px 22px; cursor: pointer; text-align: center;
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  min-height: 230px; display: flex; flex-direction: column; justify-content: center;
+}
+.persona-card:hover, .persona-card:focus-visible {
+  transform: translateY(-6px); border-color: var(--navy);
+  box-shadow: 0 12px 28px rgba(28,26,107,.16); outline: none;
+}
+.persona-card .persona-label { font-size: 23px; font-weight: 700; margin-bottom: 12px; }
+.persona-card .persona-blurb { font-size: 14px; color: var(--muted); line-height: 1.5; }
+
+/* ---- Intervention countdown ---- */
+.countdown-prompt { font-size: 30px; margin-bottom: 10px; }
+.countdown-instruction {
+  font-size: 19px; font-weight: 600; color: var(--ink) !important; margin-bottom: 26px;
+}
+.countdown-timer {
+  font-family: 'Courier New', monospace; font-size: 130px; font-weight: 700;
+  color: var(--red); line-height: 1; animation: tick 1s steps(1) infinite;
+}
+@keyframes tick { 0%, 70% { opacity: 1; } 85% { opacity: .55; } 100% { opacity: 1; } }
+
+/* ---- Video: fills the tab when playing ---- */
+.stage video { width: 100%; height: 100%; object-fit: cover; display: none; }
+.stage video.active { display: block; }
+
+.stage.cinema {
+  position: fixed; inset: 0; z-index: 9999;
+  border-radius: 0; background: #000; min-height: 100vh; padding: 0;
+}
+.stage.cinema video { object-fit: cover; }
+
+/* ---- Sidebar cards ---- */
+.card { background: #fff; border-radius: 14px; padding: 22px; margin-bottom: 20px; }
+.card h3 { margin: 0 0 12px; font-size: 17px; }
+.card hr { border: none; border-top: 1px solid var(--card-border); margin: 0 0 14px; }
+
+.field-row {
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'Courier New', monospace; font-size: 14px;
+  color: var(--muted); padding: 6px 0;
+}
+.field-row .val { color: var(--ink); font-weight: 700; font-family: inherit; }
+.field-row .val.dash { color: #b9bcc2; font-weight: 400; }
+.field-row .val.good { color: var(--green); }
+.field-row .val.bad { color: var(--red); }

@@ -1,0 +1,16 @@
+{
+  "name": "continuum-scan-server",
+  "version": "1.0.0",
+  "description": "Delegated Self scan system. Reads NFC tag UIDs from an ACR122U, relays biometric pad and button events from an Arduino, and drives the installation's web interface over WebSocket.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "list-tags": "node list-tags.js"
+  },
+  "dependencies": {
+    "nfc-pcsc": "^0.8.1",
+    "ws": "^8.17.0",
+    "serialport": "^12.0.0",
+    "@serialport/parser-readline": "^12.0.0"
+  }
+}

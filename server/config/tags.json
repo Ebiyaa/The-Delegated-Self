@@ -1,0 +1,52 @@
+{
+  "0457b592613e81": {
+    "state": "sovereign",
+    "label": "Full Agency",
+    "video": "videos/sovereign.mp4",
+    "interventionOutcome": "near_miss",
+    "walletId": "0xA11...9F2",
+    "agentOnRecord": "Not assigned",
+    "delegation": "None",
+    "agentStatus": "Idle",
+    "employmentVerified": "Yes",
+    "communityMembership": "Verified",
+    "governanceHistory": "Active",
+    "creditAccess": "Full",
+    "idVerified": "Yes",
+    "idStatus": "Confirmed"
+  },
+
+  "0457b792613e81": {
+    "state": "delegated",
+    "label": "Delegated Agent",
+    "video": "videos/delegated.mp4",
+    "interventionOutcome": "near_miss",
+    "walletId": "0xB22...8C1",
+    "agentOnRecord": "Agent-07",
+    "delegation": "Partial",
+    "agentStatus": "Active",
+    "employmentVerified": "Yes",
+    "communityMembership": "Verified",
+    "governanceHistory": "Limited",
+    "creditAccess": "Restricted",
+    "idVerified": "Yes",
+    "idStatus": "Confirmed"
+  },
+
+  "0457b692613e81": {
+    "state": "restricted",
+    "label": "Restricted / Revoked",
+    "video": "videos/restricted.mp4",
+    "interventionOutcome": "consequence",
+    "walletId": "0xC33...1D0",
+    "agentOnRecord": "Agent-07",
+    "delegation": "Full",
+    "agentStatus": "Suspended",
+    "employmentVerified": "No",
+    "communityMembership": "Revoked",
+    "governanceHistory": "Flagged",
+    "creditAccess": "None",
+    "idVerified": "No",
+    "idStatus": "Denied"
+  }
+}

@@ -1,0 +1,19 @@
+# Dependencies — reinstalled with `npm install`, never committed
+node_modules/
+
+# Video assets are large; distribute them separately
+public/videos/*.mp4
+public/videos/*.mov
+
+# macOS
+.DS_Store
+
+# Logs and local config
+*.log
+npm-debug.log*
+.env
+
+# Arduino build artefacts
+*.hex
+*.elf
+build/

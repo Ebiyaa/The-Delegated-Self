@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>DCR Protocol — Continuum</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="brand-mark">D</div>
+    DCR Protocol
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-ghost" id="resetBtn">Reset</button>
+    <button class="btn btn-primary">Log Out</button>
+  </div>
+</header>
+
+<main>
+  <h1>Delegated Self Economy</h1>
+
+  <div class="wallet-row">
+    <span>WALLET ID: <b id="walletId">None detected</b></span>
+    <span class="reader-status">
+      <span class="pulse-dot" id="pulseDot"></span>
+      <span id="readerStatusText">READER READY — HOLD A SOUL DOCUMENT TO SCAN</span>
+    </span>
+  </div>
+
+  <div class="layout">
+    <div class="stage" id="stage">
+
+      <!-- STAGE 1: idle welcome -->
+      <section class="panel active" id="panelIdle">
+        <h2>Scan your Soul ID</h2>
+        <p>Hold your Soul Document to the scan device</p>
+      </section>
+
+      <!-- STAGE 2: biometric pads -->
+      <section class="panel" id="panelBiometric">
+        <h2>Confirm it's you</h2>
+        <p>Rest your finger in the ring cradle and your palm on the pad.</p>
+        <div class="sensor-row">
+          <div class="sensor" id="sensorRing">
+            <div class="sensor-light"></div>
+            <div class="sensor-name">Ring Cradle</div>
+            <div class="sensor-state">Waiting</div>
+          </div>
+          <div class="sensor" id="sensorPalm">
+            <div class="sensor-light"></div>
+            <div class="sensor-name">Palm Pad</div>
+            <div class="sensor-state">Waiting</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STAGE 3: persona choice -->
+      <section class="panel" id="panelPersona">
+        <h2 class="persona-heading">How would you like to delegate to your Custodian?</h2>
+        <div class="persona-grid" id="personaGrid"><!-- cards injected by app.js --></div>
+      </section>
+
+      <!-- STAGE 4: intervention countdown -->
+      <section class="panel" id="panelCountdown">
+        <h2 class="countdown-prompt" id="countdownPrompt">
+          Your custodian is about to take action in 30 seconds.
+        </h2>
+        <p class="countdown-instruction">Press the button to intervene</p>
+        <div class="countdown-timer" id="countdownTimer">30</div>
+      </section>
+
+      <!-- Fullscreen video surface, shared by every stage that plays one -->
+      <video id="stageVideo" muted playsinline></video>
+    </div>
+
+    <div class="sidebar">
+      <div class="card">
+        <h3>Agent information</h3>
+        <hr>
+        <div class="field-row"><span>AGENT ON RECORD:</span><span class="val dash" id="agentOnRecord">-</span></div>
+        <div class="field-row"><span>DELEGATION:</span><span class="val dash" id="delegation">-</span></div>
+        <div class="field-row"><span>AGENT STATUS:</span><span class="val dash" id="agentStatus">-</span></div>
+      </div>
+
+      <div class="card">
+        <h3>Attestations</h3>
+        <hr>
+        <div class="field-row"><span>EMPLOYMENT VERIFIED:</span><span class="val dash" id="employmentVerified">-</span></div>
+        <div class="field-row"><span>COMMUNITY MEMBERSHIP:</span><span class="val dash" id="communityMembership">-</span></div>
+        <div class="field-row"><span>GOVERNANCE HISTORY:</span><span class="val dash" id="governanceHistory">-</span></div>
+        <div class="field-row"><span>CREDIT ACCESS:</span><span class="val dash" id="creditAccess">-</span></div>
+      </div>
+
+      <div class="card">
+        <h3>ID Detection</h3>
+        <hr>
+        <div class="field-row"><span>ID VERIFIED:</span><span class="val dash" id="idVerified">-</span></div>
+        <div class="field-row"><span>STATUS:</span><span class="val dash" id="idStatus">-</span></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
