@@ -1,24 +1,3 @@
-/**
- * server.js — Continuum + Scan bridge
- * ==================================================================
- * Sits between three things and keeps them in sync:
- *
- *   ACR122U (USB)  -->  this server  -->  browser (WebSocket)
- *                            ^ |
- *                            | v
- *                    Arduino (USB serial)
- *
- * The ACR122U is read directly over PC/SC — the Arduino is not
- * involved in NFC at all. The Arduino handles the main LED strip,
- * the two Grove temperature pads, the four pad RGB LEDs, and the
- * pinball button, exchanging short text commands over serial.
- *
- * The browser owns the interaction's stage flow (persona choice,
- * countdown, which video plays); this server relays hardware events
- * to it and pushes LED commands back down to the Arduino.
- * ==================================================================
- */
-
 const fs = require('fs');
 const path = require('path');
 const { NFC } = require('nfc-pcsc');
