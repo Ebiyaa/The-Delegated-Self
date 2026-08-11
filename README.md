@@ -1,6 +1,6 @@
-# Continuum + Scan — Integrated Build Guide
+# Delegated Self Build Guide
 
-An installation where a visitor scans a printed Soul Document, confirms presence with two body-heat pads, chooses how much authority to delegate to a "Custodian," watches that choice play out, and gets 30 seconds to intervene before the consequence lands.
+An installation where a visitor scans a printed Soul Document, confirms presence with two body-heat pads, chooses how much authority to delegate to a "Custodian," watches that choice play out, and gets 10 seconds to intervene before the consequence lands.
 
 ## The interaction, end to end
 
@@ -9,7 +9,7 @@ An installation where a visitor scans a printed Soul Document, confirms presence
 3. **Biometric check** — the ring cradle and palm pad go live immediately on scan, both pads lighting **amber**. Each pad's amber swaps to **green** once its own temperature sensor is satisfied. When both pads are green, the flow advances.
 4. **Persona choice** — three large cards: *Cautious*, *Balanced*, *Autonomous*, under the heading "How would you like to delegate to your Custodian?"
 5. **Scenario video** — the chosen persona's video plays fullscreen.
-6. **Intervention countdown** — "Your custodian is about to _[action]_ in 30 seconds. Press the button to intervene," with a large red countdown.
+6. **Intervention countdown** — "Your custodian is about to _[action]_ in 10 seconds. Press the button to intervene," with a large red countdown.
 7. **Outcome** —
    - **Button pressed** → *near-miss* video if the visitor scanned tag 1 or 2 (sovereign/delegated); *consequence* video if they scanned tag 3 (restricted).
    - **Countdown expires** → *consequence* video, regardless of tag.
@@ -24,7 +24,7 @@ Press **Esc** at any point to abort and reset to idle. The **Reset** button in t
 - Main analog RGB LED strip + 3× IRLB8748 MOSFETs + 3× 220Ω resistors (as already built)
 - 2× Grove Temperature Sensor v1.3
 - 4× single-colour 5mm LEDs — 2 amber and 2 green (one pair per pad)
-- 4× 330Ω resistors (one per pad LED; 220Ω–1kΩ also fine)
+- 4× 220Ω resistors (one per pad LED; 220Ω–1kΩ also fine)
 - Pinball controller button
 - External 5V supply for the main strip
 
@@ -50,7 +50,7 @@ Both Grove sensors also need VCC → 5V and GND → GND. Everything shares one c
 Four ordinary single-colour LEDs — no common pin, no anode/cathode flag, no colour-order guesswork. Each one wires identically:
 
 ```
-LED long leg (+)  →  330Ω resistor  →  its Arduino pin
+LED long leg (+)  →  220Ω resistor  →  its Arduino pin
 LED short leg (−) →  GND
 ```
 
@@ -82,7 +82,7 @@ Body heat vs. room temperature differs by space, so calibrate on site:
 1. In the sketch, set `const bool DEBUG_TEMPS = true;` and upload.
 2. Run `npm start` and watch the terminal for `[calibration] TEMP:<ring>,<palm>` lines.
 3. Note the readings with nothing touching the pads, then with a finger/palm resting on them.
-4. Set `TEMP_THRESHOLD_C` to a value between the two (default is `30.0`).
+4. Set `TEMP_THRESHOLD_C` to a value between the two (default is `27.0`).
 5. Set `DEBUG_TEMPS = false` and re-upload.
 
 `SENSOR_SETTLE_MS` (default 400ms) controls how long a reading must hold before it's accepted — raise it if the pads flicker between amber and green.
@@ -106,7 +106,7 @@ The three tag videos were copied over from `soul-scanner`. The other five still 
 
 ### 5. Customise the persona text
 
-`server/config/personas.json` holds each card's label, description, video path, and the `action` string that fills in "Your custodian is about to **_____** in 30 seconds." Edit these to match your footage.
+`server/config/personas.json` holds each card's label, description, video path, and the `action` string that fills in "Your custodian is about to **_____** in 10 seconds." Edit these to match your footage.
 
 ### 6. Run it
 
@@ -138,7 +138,7 @@ The 10-second scan-color timer lives **on the Arduino**, so it's unaffected by v
 
 **Both pads go green without anyone touching them** — threshold too low; the sensors are reading ambient as contact.
 
-**Button does nothing** — it only registers during the 30-second countdown, by design. Check the terminal for `BTN:1` when you press it; if that appears but nothing happens on screen, the countdown wasn't running.
+**Button does nothing** — it only registers during the 10-second countdown, by design. Check the terminal for `BTN:1` when you press it; if that appears but nothing happens on screen, the countdown wasn't running.
 
 **"Resource busy" when uploading** — `server.js` or the Arduino IDE's Serial Monitor still has the port. Stop `npm start` (Ctrl+C) and close Serial Monitor, then upload.
 
